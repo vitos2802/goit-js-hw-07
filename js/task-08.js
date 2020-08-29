@@ -8,13 +8,21 @@ const btnDestroyRef = controlsRef.querySelector(
 );
 const fragment = document.createDocumentFragment();
 
-const randomColor = () => Math.round(Math.random() * 255);
+const randomColor = () => {
+  const value = () => Math.round(Math.random() * 255);
+  return `rgb(${value()}, ${value()}, ${value()})`;
+};
+const createBox = (size) => {
+  const box = document.createElement("div");
+  box.style.width = `${size}px`;
+  box.style.height = `${size}px`;
+  box.style.backgroundColor = randomColor();
+  return box;
+};
 const createBoxesInFragment = (amount) => {
   for (let i = 0; i < amount; i += 1) {
-    const box = document.createElement("div");
-    box.style.width = 30 + i * 10 + "px";
-    box.style.height = 30 + i * 10 + "px";
-    box.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+    const size = 30 + i * 10;
+    const box = createBox(size);
     fragment.appendChild(box);
   }
 };
